@@ -4,10 +4,15 @@
   const jwt = ref("");
   const decoded= ref("");
   function decode(){
-    decoded.value = jose.decodeJwt(jwt.value);
+    try{
+        decoded.value = jose.decodeJwt(jwt.value);
+    }catch(err){
+        decoded.value= err.message;
+    }
   }
   function saveJwt(){
     localStorage.setItem('jwt',jwt.value);
+    loadSavedJwt();
   }
   const savedJwt= ref("");
   function loadSavedJwt() {

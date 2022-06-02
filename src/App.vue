@@ -3,12 +3,18 @@
   const count = ref(0)
 
   setInterval(function () {count.value++},1000)
-  console.log(count.value);
+   function resetCompteur() {
+    count.value = 0;
+  }
 </script>
 
 <template>
   <h1>Hello World!</h1>
   <h1>Compteur : {{count}}</h1>
+  <div>
+    <button @click="resetCompteur()">Remettre à 0</button>
+    <input type="number" v-model="count">
+  </div>
 </template>
 
 <style>

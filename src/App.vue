@@ -6,6 +6,7 @@
   const jwt = ref("");
   const decoded= ref("");
   let show = ref(false);
+  const token = ref("");
 
   setInterval(function () {count.value++},1000)
    function resetCompteur() {
@@ -14,7 +15,16 @@
   function decode(){
     decoded.value = jose.decodeJwt(jwt.value);
     show.value=true;
+    addLocalStorage();
   }
+  function addLocalStorage() {
+    // Si le token est vide
+    if ( !token.value ) {
+      localStorage.setItem('token', jwt.value);
+      token.value = localStorage.getItem('token');
+    }
+  }
+
 </script>
 
 <template>
@@ -31,11 +41,14 @@
 
   <input type="text" v-model="jwt" placeholder="insérer un JWT">
   <button @click="decode()">Decoder</button>
-  
+
   <p v-if="show">
     {{decoded}}
   </p>
 
+  <p v-if="token">
+    {{ token }}
+  </p>
 </template>
 
 <style>

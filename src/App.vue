@@ -28,11 +28,10 @@
 
   <h1>JWT exo3</h1>
   <hr>
-  <form @submit.prevent="decode()">
-    <input type="text" v-model="jwt" placeholder="insérer un JWT">
-    <input type="submit" value="Decoder" />
-  </form>
 
+  <input type="text" v-model="jwt" placeholder="insérer un JWT">
+  <button @click="decode()">Decoder</button>
+  
   <p v-if="show">
     {{decoded}}
   </p>
